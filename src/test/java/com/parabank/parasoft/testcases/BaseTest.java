@@ -33,14 +33,10 @@ public class BaseTest {
     public void setupBrowser() {
         String browserName = properties.getProperty("browserName");
         if (Objects.equals(browserName, "firefox")) {
-//            WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
         } else if (Objects.equals(browserName, "chrome")) {
-//            WebDriverManager.chromiumdriver().setup();
             driver = new ChromeDriver();
-
         } else if (Objects.equals(browserName, "headless")) {
-//            WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
         } else {
             System.out.println("Please provide right Browser Name");
