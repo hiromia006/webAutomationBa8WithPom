@@ -26,4 +26,11 @@ public class CustomerLoginPage extends BasePage {
     public boolean isLoginPage() {
         return getWebElements(By.cssSelector("form[name='login']")).size() > 0;
     }
+
+    public OverviewPage doLogin(String username, String password) {
+        return
+                fillUsername(username)
+                        .fillPassword(password)
+                        .clickLoginBtn();
+    }
 }
