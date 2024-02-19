@@ -33,4 +33,9 @@ public class CustomerLoginPage extends BasePage {
                         .fillPassword(password)
                         .clickLoginBtn();
     }
+
+    public RegisterPage clickRegisterLink() {
+        getWebElement(By.linkText("Register")).click();
+        return getInstance(RegisterPage.class);
+    }
 }

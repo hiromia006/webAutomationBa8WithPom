@@ -1,5 +1,7 @@
 package com.parabank.parasoft.pages;
 
+import com.aventstack.extentreports.Status;
+import com.parabank.parasoft.report.ReportTestManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,8 +23,10 @@ public class BasePage extends Page {
     public WebElement getWebElement(By locator) {
         WebElement webElement = null;
         try {
+            addInfo(locator.toString() + " going to operate");
             waitForWebElement(locator);
             webElement = driver.findElement(locator);
+            addInfo(locator.toString() + " already did successfully operation");
         } catch (Exception exception) {
             System.out.println(locator.toString() + " Select or Locator Not Found");
         }
@@ -48,6 +52,13 @@ public class BasePage extends Page {
             wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         } catch (Exception exception) {
             System.out.println(locator.toString() + " Select or Locator Not Found");
+        }
+    }
+
+
+    public void addInfo(String message) {
+        if (ReportTestManager.getTest() != null) {
+            ReportTestManager.getTest().log(Status.INFO, message);
         }
     }
 }
