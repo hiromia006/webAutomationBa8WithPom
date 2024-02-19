@@ -37,8 +37,11 @@ public class BasePage extends Page {
     public List<WebElement> getWebElements(By selector) {
         List<WebElement> webElements = null;
         try {
+            addInfo(selector.toString() + " going to operate");
             waitForWebElement(selector);
             webElements = driver.findElements(selector);
+            addInfo(selector.toString() + " already did successfully operation");
+
         } catch (Exception exception) {
             System.out.println(selector.toString() + " Select or Locator Not Found");
         }
