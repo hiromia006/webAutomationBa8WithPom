@@ -5,8 +5,10 @@ import com.parabank.parasoft.pages.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,14 +32,18 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public void setupBrowser() {
-        String browserName = properties.getProperty("browserName");
+    @Parameters("BrowserType")
+    public void setupBrowser(String BrowserType) {
+//        String browserName = properties.getProperty("browserName");
+        String browserName = BrowserType;
         if (Objects.equals(browserName, "firefox")) {
             driver = new FirefoxDriver();
         } else if (Objects.equals(browserName, "chrome")) {
             driver = new ChromeDriver();
         } else if (Objects.equals(browserName, "headless")) {
-            driver = new FirefoxDriver();
+            FirefoxOptions options=new FirefoxOptions();
+            options.addArguments("-headless");
+            driver = new FirefoxDriver(options);
         } else {
             System.out.println("Please provide right Browser Name");
         }
